@@ -48,9 +48,6 @@ There might be some issues if the download of the model is interrupted during th
 You can specify which way of chatting you want to use in `chat_config.py`. You can also take a look at the opt files in the `configs` folders which can allow you to custom the models (for inference or to fine tune them).
 
 You can store history conversations in the `text_files` folder and change the related paths in the configs. You can also create a database of personas in a `.csv` file to load them at the end of the context. 
-Be aware that for `summsc_fidrag` model, personas are delimited by `\n` and for `blenderbot2` it's `'  '` (double space). You can check the `notes.mmd` file to have information about the parameters to use for inference and the specificities of each model.
-
-For now privilege interacting with BlenderBot 2 because it is more memory friendly and the memory retriver is improved compared to Summsc.
 
 ### Interact in command line (easier control on data) :smile:
 There is a script to interact directly with the model from a simple python script
@@ -86,22 +83,3 @@ ssh -L local_port:remote_server_ip:remote_port remote_name@remote_host
 ssh -L 8080:192.168.10.40:7860 remote_name@remote_host
 ```
 The local terminal will ask you your ID for your remote account and you can now access to the chatbot API on `localhost:8080`.
-
-### Interact with Streamlit API (DEPRECATED) :confused:
-To use the streamlit chat interface launch the server on the remote machine with
-```
-streamlit run stream_chat.py
-```
-And on your local machine create a tunnel to this server with 
-```
-ssh -L local_port:remote_server_ip:remote_port remote_name@remote_host
-ssh -L 8080:192.168.10.40:8501 remote_name@remote_host
-```
-The local terminal will ask you your ID for your remote account and you can now access to the chatbot API on `localhost:8080`.
-Solution not working perfectly due to how streamlit run the script each time and thus load the model each run, so it overloads the RAM very fast.
-
-## Computing ressources requirements :factory:
-
-The Summsc_FIDRAG model is not the most optmized model so it can use up to 24Go of CPU RAM. The BB2 (3B) model can use up to 20Go of CPU RAM and the 400M one can use up to 10Go of CPU RAM. 
-
-It also depends a lot on the size of the history loaded and the inference time can take around 1 minute per answer on CPU (and around 5 secondes on GPU but it will need enough VRAM). The inference time augments with the length of the context. 
