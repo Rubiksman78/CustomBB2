@@ -1,0 +1,21 @@
+tasks:
+        default:
+                onboard_world: MessengerBotChatOnboardWorld
+                task_world: MessengerBotChatTaskWorld
+                timeout: 1800
+                agents_required: 1
+task_name: chatbot
+world_module: parlai.chat_service.tasks.chatbot.worlds
+overworld: MessengerOverworld
+max_workers: 30
+opt:  # Additional model opts go here
+        debug: True
+        models:
+                summsc_fidrag3B:
+                        model: transformer/generator
+                        model_file: zoo:msc/summsc_fidrag3B/model #you can change to blenderbot2 if you want to interact with it
+                        interactive_mode: True
+                        no_cuda: True #Change to False if you want to use GPU
+additional_args:
+        page_id: 1
+                                                                                                        

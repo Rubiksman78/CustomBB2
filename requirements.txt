@@ -1,0 +1,7 @@
+-r ParlAI/requirements.txt
+
+deepl-translate
+gradio
+mdit_py_plugins
+transformers
+faiss-gpu #or faiss-cpu if you don't have a gpu

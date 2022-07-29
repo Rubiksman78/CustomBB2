@@ -1,0 +1,3 @@
+id:localHuman	text:Hi	labels:Hi! How are you doing today? I just got back from walking my dog, how about you?
+id:localHuman	text:I am working	labels:I am sorry to hear that. What do you do for work? I am a dog walker.	episode_done:True
+
