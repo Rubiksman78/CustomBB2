@@ -36,7 +36,7 @@ def speak_loop(n_turns, agent,context):
     st.text_input("Talk to the bot", key="input_text", on_change=generate_answer)
     for chat in st.session_state.history:
         
-        message(**chat)  # unpacking
+        message(**chat)  
 
 if __name__ == '__main__':
     use_cuda = DEFAULT_CONFIG["USE_CUDA"]

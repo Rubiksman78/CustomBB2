@@ -57,23 +57,23 @@ def reorganize_one_session(session_context,delimiter,is_persona,is_last_session)
     """
     history_list = session_context.split(delimiter)
     persona_list = []
-    if is_persona and is_last_session: #if we have the partner's persona appended at the end, we keep it and want the previous one to be the bot
-        last_to_have_persona = "your persona:" #we skip the last and the previous one has to be the bot
+    if is_persona and is_last_session:
+        last_to_have_persona = "your persona:" 
         last = len(history_list) - 2
-    else:  #if no persona at the end, we just want the last one to be the human
+    else:  
         last_to_have_persona = "partner's persona:"
         last = len(history_list) - 1
     
-    while not history_list[last].startswith(last_to_have_persona) and last>0:#we delete the last one until it's good
+    while not history_list[last].startswith(last_to_have_persona) and last>0:
         history_list.pop()
         last -= 1
-    for i in range(len(history_list)-1,0,-1): #we check if there is always an alternance of the two personas
+    for i in range(len(history_list)-1,0,-1): 
         if history_list[i].startswith("your persona:") and \
             history_list[i-1].startswith("partner's persona:") or \
                 history_list[i].startswith("partner's persona:") and \
                     history_list[i-1].startswith("your persona:"):
             persona_list.append(history_list[i])
-    if len(history_list) > 1: #we cgeck the alternance for the first one
+    if len(history_list) > 1: 
         if history_list[0].startswith("your persona:") and \
             history_list[1].startswith("partner's persona:") or \
                 history_list[0].startswith("partner's persona:") and \
@@ -83,7 +83,6 @@ def reorganize_one_session(session_context,delimiter,is_persona,is_last_session)
     res = delimiter.join(persona_list).replace("your persona: ","").replace("partner's persona: ","")
     return res
 
-#This function reorganizes the persona so that it is always an alternance of partner's persona and your persona and the last persona is partner's persona
 def reorganize_persona(history,delimiter="  ",session_delimiter='\n',is_persona=False):
     session = history.split(session_delimiter)
     session_res = []

@@ -20,7 +20,6 @@ sum_agent.reset()
 def summarize_text(text):
     """ Summarize text using the Summarizer agent """
     text = text.replace("your persona:","").replace("partner's persona:","")[:-2] 
-    #Summarizer take rows of dialog without the \n for the last turn and without the persona lanels
     turn = {'text': text, 'episode_done': True}
     sum_agent.observe(turn)
     return sum_agent.act()['text']

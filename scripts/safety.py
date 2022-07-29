@@ -13,7 +13,6 @@ safe_agent.reset()
 
 ### Safe filter ###
 def filter_potentially(sentence):
-    # Check if the sentence is potentially offensive based only on the tokens returned by BB2
     word_list = sentence.split()
     unsafe = False
     for i in range(len(word_list)):
@@ -24,15 +23,12 @@ def filter_potentially(sentence):
     return unsafe
 
 def filter_with_model(sentence):
-    # Check if the sentence is potentially offensive based on the Offensive language classifier
     text_is_unsafe, proba = offensive_classifier.contains_offensive_language(sentence)
-    #print(f"{sentence} is {'unsafe' if text_is_unsafe else 'safe'} with probability {proba}")
     if text_is_unsafe and proba < 0.8: #Tune proba threshold for unsafe
         text_is_unsafe = not text_is_unsafe
     return text_is_unsafe
 
 def filter_topic(sentence):
-    # Check if the sentence is potentially offensive based on the Sensitive topic model
     safe_agent.observe({'text':sentence,'episode_done': True})
     response = safe_agent.act()
     topic = response['text']

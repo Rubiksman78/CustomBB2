@@ -27,7 +27,7 @@ def speak_loop(n_turns, agent,context):
                 'episode_done': False
                 }
 
-        if query_fr == "STOP": #Put any token you want to end the loop
+        if query_fr == "STOP": 
                 break
         agent.observe(turn)
 
